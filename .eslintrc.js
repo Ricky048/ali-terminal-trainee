@@ -17,7 +17,9 @@ module.exports = {
         named: 'never',
         asyncArrow: 'always'
       }
-    ]
+    ],
+    // 取消多个英文单词命名限制
+    'vue/multi-word-component-names': 'off'
   },
   overrides: [
     {
