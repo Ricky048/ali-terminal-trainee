@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "33519",
+      "name": "home_fill",
+      "font_class": "homefill",
+      "unicode": "e6c4",
+      "unicode_decimal": 59076
+    },
+    {
+      "icon_id": "6775452",
+      "name": "步行",
+      "font_class": "yiliaohangyedeICON-",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "32144328",
+      "name": "步行-copy-copy",
+      "font_class": "yiliaohangyedeICON--copy-copy",
+      "unicode": "e7b5",
+      "unicode_decimal": 59317
+    },
+    {
+      "icon_id": "1611119",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "29929",
       "name": "emoji",
       "font_class": "emoji",
