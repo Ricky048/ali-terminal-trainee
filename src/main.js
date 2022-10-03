@@ -12,7 +12,6 @@ import '../iconfont.js'
 // 引入全局view
 import Header from '@/views/Header.vue'
 import Footer from '@/views/Footer.vue'
-import '@/views/my.vue'
 
 // 全局配置请求根路径
 // 这里使用的是和风天气的api

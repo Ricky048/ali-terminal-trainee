@@ -5,6 +5,7 @@
     <!-- <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-yiliaohangyedeICON--copy-copy"></use>
     </svg> -->
+    <router-view />
     <Footer></Footer>
   </div>
 </template>
@@ -25,6 +26,13 @@
 export default {
   data() {
     return {}
+  },
+  created() {
+    console.log(this.$route) //打印当前路由属性
+    // 路由启动初始化页面，默认为天气界面
+    if (this.$route.path === '/') {
+      this.$router.push('/')
+    }
   }
 }
 </script>

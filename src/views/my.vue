@@ -8,8 +8,9 @@ export default {}
 
 <style>
 .my-box {
-  height: 100%;
+  position: relative;
+  height: 100vh;
   width: 100%;
-  background-color: red;
+  background-color: green;
 }
 </style>

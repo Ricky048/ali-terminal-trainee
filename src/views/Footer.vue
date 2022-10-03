@@ -1,7 +1,7 @@
 <template>
   <div class="Footer">
-    <van-tabbar v-model="active" active-color="#000" inactive-color="#808A87" fixed="true">
-      <van-tabbar-item v-for="(item, id) in tabbarItem" :key="id">
+    <van-tabbar v-model="active" active-color="#000" inactive-color="#808A87" route>
+      <van-tabbar-item v-for="(item, id) in tabbarItem" :key="id" :to="item.path" replace>
         <span>
           {{ item.title }}
         </span>
@@ -19,11 +19,11 @@ export default {
   data() {
     return {
       tabbarItem: [
-        { title: '天气', iconPath: require('@/assets/icons/weather.png'), activeIconPath: require('@/assets/icons/weather-active.png') },
-        { title: '运动', iconPath: require('@/assets/icons/running.png'), activeIconPath: require('@/assets/icons/running-active.png') },
-        { title: '我的', iconPath: require('@/assets/icons/my.png'), activeIconPath: require('@/assets/icons/my-active.png') }
+        { title: '天气', iconPath: require('@/assets/icons/weather.png'), activeIconPath: require('@/assets/icons/weather-active.png'), path: '/' },
+        { title: '运动', iconPath: require('@/assets/icons/running.png'), activeIconPath: require('@/assets/icons/running-active.png'), path: '/sport' },
+        { title: '我的', iconPath: require('@/assets/icons/my.png'), activeIconPath: require('@/assets/icons/my-active.png'), path: '/my' }
       ],
-      active: 0
+      active: 1
     }
   }
 }
