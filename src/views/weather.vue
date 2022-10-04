@@ -1,4 +1,5 @@
 <template>
+  <!-- 天气的界面 -->
   <div class="weather-box"></div>
 </template>
 

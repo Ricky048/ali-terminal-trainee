@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import bus from '@/store/bus.js'
 export default {
   data() {
     return {
@@ -35,12 +36,18 @@ export default {
       // 点击时加载动画，并且将flag设置为true
       item.inAnimation = true
       // 同时将上一个已经加载了动画的组件的flag设置为false
+      // 感觉这个速度不够快，或许得设置一个并发？？
       if (item.id !== this.active) this.tabbarItem[this.active].inAnimation = false
     }
   },
   created() {
     // 界面刚开始加载时启动动画使weather/home界面突出
     this.tabbarItem[this.active].inAnimation = true
+  },
+  updated() {
+    // 组件更新时向父组件以及兄弟组件传递active的数值，用于对页面进行更新
+    this.$emit('activePage', this.active)
+    bus.$emit('activePage', this.active)
   }
 }
 </script>

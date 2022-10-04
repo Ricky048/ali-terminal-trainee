@@ -1,29 +1,32 @@
 <template>
-  <div class="header-box container">
-    <local :area="realTimeArea"></local>
+  <!-- 头部区域 -->
+  <div class="header-box">
+    <local :area="realTimeArea" :active="active"></local>
   </div>
 </template>
 
 <script>
 import local from '@/components/Location.vue'
+import bus from '@/store/bus.js'
 export default {
   data() {
     return {
       // 实时区域显示文本
-      realTimeArea: '南海区'
+      realTimeArea: '南海区',
+      active: 0
     }
   },
   name: 'Header',
   components: {
     local
   },
-  methods: {
-    async getRealTimeWeather() {
-      const res = await this.$http.get('/now?location=101010100&key=17fc788e661c475da127af5e7011abff')
-      console.log(res)
-    }
+  methods: {},
+  created() {
+    bus.$on('activePage', (val) => {
+      this.active = val
+    })
   },
-  created() {}
+  updated() {}
 }
 </script>
 

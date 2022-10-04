@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-    <!-- <van-nav-bar title="标题" /> -->
-    <HeaderBox></HeaderBox>
+    <HeaderBox v-if="active !== 2"></HeaderBox>
     <!-- <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-yiliaohangyedeICON--copy-copy"></use>
     </svg> -->
     <router-view />
-    <Footer></Footer>
+    <Footer @activePage="getActivePage"></Footer>
   </div>
 </template>
 
@@ -25,7 +24,19 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      active: 0
+    }
+  },
+  methods: {
+    getActivePage(val) {
+      this.active = val
+    }
+  },
+  watch: {
+    // active: {
+    //   handler() {}
+    // }
   },
   created() {
     // console.log(this.$route) //打印当前路由属性
@@ -33,6 +44,7 @@ export default {
     if (this.$route.path === '/') {
       this.$router.push('/')
     }
+    // this.getActivePage()
   }
 }
 </script>
