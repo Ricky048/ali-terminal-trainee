@@ -32,7 +32,11 @@ export default {
 
 <style>
 .header-box {
+  position: fixed;
   width: 100%;
-  background-color: orange;
+  height: 10vw;
+  line-height: 10vw;
+  background-color: #fff;
+  /* background-color: orange; */
 }
 </style>

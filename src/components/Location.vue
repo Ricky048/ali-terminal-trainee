@@ -41,14 +41,15 @@ export default {
 @ip6: 3.75vw;
 .location {
   display: flex;
-  font-size: (16 / @ip6);
-  font-weight: 550;
+  font-size: (14 / @ip6);
+  font-weight: 500;
   justify-content: space-between;
   align-items: center;
   padding: 0 (12 / @ip6);
   margin: 0 auto;
-  height: 10vw;
-  background-color: pink;
+  // background-color: pink;
+  box-sizing: border-box;
+  border-top: #3f3f3f 1px solid;
   color: #3f3f3f;
 
   .icon-right,
@@ -57,13 +58,14 @@ export default {
     font-weight: 1000;
     // transform: rotate(90deg);
     margin-left: 0.6vw;
+    vertical-align: middle;
   }
 
   .icon-location {
     font-size: (18 / 3.75vw);
     transform: rotate(0);
     margin-left: 0;
-    margin-right: 0.2vw;
+    margin-right: 0.5vw;
   }
 
   .icon-caidan {

@@ -1,6 +1,6 @@
 <template>
   <div class="Footer">
-    <van-tabbar v-model="active" active-color="#000" inactive-color="#808A87" route>
+    <van-tabbar v-model="active" active-color="#000" inactive-color="#808A87" route :border="false">
       <van-tabbar-item v-for="(item, id) in tabbarItem" :key="id" :to="item.path" replace>
         <!-- tabbar文字 -->
         <span class="title">
@@ -64,7 +64,7 @@ export default {
   }
 
   #Anim {
-    animation: icon-enlarge 0.2s forwards;
+    animation: icon-enlarge 0.1s forwards;
   }
 
   .icon-box {

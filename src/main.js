@@ -9,6 +9,9 @@ import 'vant/lib/index.css'
 // 引入iconfont Symbol图标包
 import '../iconfont.js'
 
+// 引入lottie动画组件
+import LottieVue from 'vue-lottie'
+
 // 引入全局view
 import Header from '@/views/Header.vue'
 import Footer from '@/views/Footer.vue'
@@ -24,6 +27,7 @@ Vue.config.productionTip = false
 // 组件
 Vue.component('HeaderBox', Header)
 Vue.component('Footer', Footer)
+Vue.component('lottie', LottieVue)
 Vue.use(Tabbar)
 Vue.use(TabbarItem)
 Vue.use(NavBar)
