@@ -28,7 +28,7 @@ export default {
     return {}
   },
   created() {
-    console.log(this.$route) //打印当前路由属性
+    // console.log(this.$route) //打印当前路由属性
     // 路由启动初始化页面，默认为天气界面
     if (this.$route.path === '/') {
       this.$router.push('/')
