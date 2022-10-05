@@ -3,18 +3,20 @@
     <div class="left">
       <lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation"></lottie>
       <div class="detail">
-        <span class="weather-desc">{{ realTimeWeather.text }} {{ weather.daily[0].tempMax }}/{{ weather.daily[0].tempMin }}℃</span>
+        <span class="weather-desc">{{ realTimeWeather().text }} {{ dailyWeather().daily[0].tempMax }}/{{ dailyWeather().daily[0].tempMin }}℃</span>
         <span class="time">{{ timeArea }} {{ time }}</span>
       </div>
     </div>
     <div class="temp">
-      <span class="area-temp">{{ realTimeWeather.temp }}</span>
-      <span class="feeling-temp">体感：{{ realTimeWeather.feelsLike }}°</span>
+      <span class="area-temp">{{ realTimeWeather().temp }}</span>
+      <span class="feeling-temp">体感：{{ realTimeWeather().feelsLike }}°</span>
     </div>
   </div>
 </template>
 
 <script>
+// 引入vuex
+import { mapState } from 'vuex'
 // 导入天气lottie
 // 柔和半透明图标
 import sunny_day from '@/assets/Lottie/sunny-day.json'
@@ -53,23 +55,21 @@ import tornado from '@/assets/Lottie/tornado.json'
 export default {
   name: 'weather_info_box',
   props: {
-    realTimeWeather: {
-      type: Object,
-      default: null
-    },
-    weather: {
-      type: Object,
-      default: null
-    },
-    iconToNum: {
-      type: String,
-      default: ''
-    }
+    // realTimeWeather: {
+    //   type: Object,
+    //   default: null
+    // },
+    // dailyWeather: {
+    //   type: Object,
+    //   default: null
+    // }
   },
   computed: {},
   data() {
     return {
-      defaultOptions: { animationData: sunny_day, loop: true, autoplay: true },
+      ...mapState('m_weather', ['realTimeWeather', 'dailyWeather']),
+
+      defaultOptions: { animationData: night_rain, loop: true, autoplay: true },
       defaultAnim: '',
       weatherIcon: [
         {
@@ -161,6 +161,10 @@ export default {
       timeArea: ''
       // 接受实时信息
       // realTimeWeather: this.realTimeWeather
+      // dailyWeather: {
+      //   tempMax: 36,
+      //   tempMin: -1
+      // }
     }
   },
   methods: {
@@ -187,26 +191,22 @@ export default {
     searchIcon() {
       this.weatherIcon.forEach((element) => {
         // console.log(element)
-        if (element.id === Number(this.iconToNum)) {
+        // 注意从vuex中取出来的数据需要加上括号，不然识别不到
+        if (element.id === Number(this.realTimeWeather().icon)) {
+          console.log(this.realTimeWeather().icon)
           this.defaultOptions.animationData = element.path
-          // console.log(this.iconToNum)
           return
         }
       })
     }
-    // getData() {
-    //   this.realTimeWeather = this.realTimeWeather
-    //   console.log(this.realTimeWeather)
-    // }
   },
   created() {
     this.getTime()
     this.disTimeArea()
     this.searchIcon()
+    console.log(this.realTimeWeather())
   },
-  mounted() {
-    // console.log(this.realTimeWeather)
-  }
+  mounted() {}
 }
 </script>
 
