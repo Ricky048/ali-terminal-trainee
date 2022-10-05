@@ -10,6 +10,8 @@ import '../iconfont.js'
 // Install plugins
 import './plugins'
 
+import './styles/index.less'
+
 // 全局配置请求根路径
 // 这里使用的是和风天气的api
 axios.defaults.baseURL = 'https://devapi.qweather.com/v7/weather'

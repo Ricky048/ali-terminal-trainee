@@ -7,6 +7,6 @@
 <style lang="less">
 .app-main {
   flex: 1;
-  background-color: #efefef;
+  background-color: #f8f8f8;
 }
 </style>

@@ -1,25 +1,24 @@
 <template>
   <div class="app-sport">
-    <div class="card">
+    <Card>
       🏃‍ 跑步
-    </div>
+    </Card>
+
+    <h4>跑步记录</h4>
+    <Record />
   </div>
 </template>
 
 <script>
-export default {}
+import Card from './components/Card.vue'
+import Record from './components/Record.vue';
+export default {
+  components: { Card, Record }
+}
 </script>
 
 <style scoped lang="less">
 .app-sport {
   padding: 12px;
-
-  .card {
-    background: #fff;
-    border-radius: 5px;
-    padding: 30px 20px;
-    font-size: 5vw;
-    font-weight: bold;
-  }
 }
 </style>
