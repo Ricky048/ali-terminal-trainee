@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 // 运动模块
 const sportRoutes = [
   {
-    path: "/sport",
+    path: '/sport',
     name: 'sport',
     component: () => import('@/views/sport/index.vue')
   }

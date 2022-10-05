@@ -1,7 +1,7 @@
 <template>
   <div class="main-info-box">
     <div class="left">
-      <Lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation"> </Lottie>
+      <Lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation"></Lottie>
       <div class="detail">
         <span class="weather-desc">{{ realTimeWeather().text }} {{ dailyWeather().daily[0].tempMax }}/{{ dailyWeather().daily[0].tempMin }}℃</span>
         <span class="time">{{ timeArea }} {{ time }}</span>
@@ -74,6 +74,7 @@ export default {
 
       defaultOptions: { animationData: night_rain, loop: true, autoplay: true },
       defaultAnim: '',
+
       weatherIcon: [
         {
           path: sunny_day,
@@ -181,7 +182,7 @@ export default {
     disTimeArea() {
       let date = new Date().getHours()
       let time = ''
-      if (0 <= date && date < 3) time = '拂晓'
+      if (0 < date && date < 3) time = '拂晓'
       else if (3 <= date && date < 6) time = '黎明'
       else if (6 <= date && date < 9) time = '清晨'
       else if (9 <= date && date < 12) time = '上午'
@@ -230,7 +231,7 @@ export default {
   height: (150 / 3.75vw);
   width: 100%;
   border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.65);
   color: #efefef;
   box-sizing: border-box;
 

@@ -4,6 +4,10 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
+// 全局引入Lottie
+import Lottie from 'vue-lottie'
+Vue.component('Lottie', Lottie)
+
 // 引入iconfont Symbol图标包
 import '../iconfont.js'
 
@@ -17,7 +21,6 @@ axios.defaults.baseURL = 'https://devapi.qweather.com/v7/weather'
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
-
 new Vue({
   router,
   store,
