@@ -2,13 +2,23 @@
 export default {
   namespaced: true,
   state: () => ({
-    // weather: JSON.parse()
-    // weather: this.getRealTimeWeather()
+    realTimeWeather: Object,
+    dailyWeather: Object
   }),
 
   mutations: {
-    saveRealTimeDataToStorage() {
+    saveToStorage(state) {
       // this.
+    },
+
+    // 获取当前实时气象数据
+    updateRealTimeWeather(state, weather) {
+      state.realTimeWeather = weather
+    },
+
+    // 获取未来气象数据
+    updateFutureWeather(state, weather) {
+      state.dailyWeather = weather
     }
   }
 }
