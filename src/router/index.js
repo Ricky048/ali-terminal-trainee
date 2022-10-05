@@ -3,17 +3,22 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+// 运动模块
+const sportRoutes = [
+  {
+    path: "/sport",
+    name: 'sport',
+    component: () => import('@/views/sport/index.vue')
+  }
+]
+
 const routes = [
   {
     path: '/',
     name: 'weather',
     component: () => import('@/views/weather.vue')
   },
-  {
-    path: '/sport',
-    name: 'sport',
-    component: () => import('@/views/sport.vue')
-  },
+  ...sportRoutes,
   {
     path: '/my',
     name: 'my',
