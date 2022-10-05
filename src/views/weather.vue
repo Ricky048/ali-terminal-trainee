@@ -50,7 +50,7 @@ export default {
     // this.getRealTimeWeather()
     this.getWeather()
   },
-  mounted() {}
+  mounted() { }
 }
 </script>
 

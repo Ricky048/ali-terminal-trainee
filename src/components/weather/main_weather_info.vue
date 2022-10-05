@@ -1,9 +1,11 @@
 <template>
   <div class="main-info-box">
     <div class="left">
-      <lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation"></lottie>
+      <Lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation">
+      </Lottie>
       <div class="detail">
-        <span class="weather-desc">{{ realTimeWeather.text }} {{ weather.daily[0].tempMax }}/{{ weather.daily[0].tempMin }}℃</span>
+        <span class="weather-desc">{{ realTimeWeather.text }} {{ weather.daily[0].tempMax }}/{{ weather.daily[0].tempMin
+        }}℃</span>
         <span class="time">{{ timeArea }} {{ time }}</span>
       </div>
     </div>
@@ -15,6 +17,9 @@
 </template>
 
 <script>
+// 引入lottie动画组件
+import Lottie from 'vue-lottie'
+
 // 导入天气lottie
 // 柔和半透明图标
 import sunny_day from '@/assets/Lottie/sunny-day.json'
@@ -206,12 +211,16 @@ export default {
   },
   mounted() {
     // console.log(this.realTimeWeather)
+  },
+  components: {
+    Lottie
   }
 }
 </script>
 
 <style lang="less" scoped>
 @ip6: 3.75vw;
+
 .main-info-box {
   display: flex;
   justify-content: space-between;
@@ -230,6 +239,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: baseline;
+
     .area-temp {
       font-size: (70 / @ip6);
       font-weight: 600;
@@ -268,8 +278,7 @@ export default {
       bottom: (2 / @ip6);
       left: (10 / @ip6);
 
-      .weather-desc {
-      }
+      .weather-desc {}
 
       .time {
         font-size: (12 / @ip6);

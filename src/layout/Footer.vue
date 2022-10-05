@@ -28,7 +28,7 @@ export default {
         { title: '运动', iconPath: require('@/assets/icons/running.png'), activeIconPath: require('@/assets/icons/running-active.png'), path: '/sport', inAnimation: false, id: 1 },
         { title: '我的', iconPath: require('@/assets/icons/my.png'), activeIconPath: require('@/assets/icons/my-active.png'), path: '/my', inAnimation: false, id: 2 }
       ],
-      active: 0
+      active: this.$store.state.app.activeIndex
     }
   },
   methods: {
@@ -45,9 +45,7 @@ export default {
     this.tabbarItem[this.active].inAnimation = true
   },
   updated() {
-    // 组件更新时向父组件以及兄弟组件传递active的数值，用于对页面进行更新
-    this.$emit('activePage', this.active)
-    bus.$emit('activePage', this.active)
+    this.$store.commit('changeActiveIndex', this.active)
   }
 }
 </script>
@@ -55,10 +53,12 @@ export default {
 <style lang="less" scoped>
 // 此处使用iPhone6来进行设计，故使用ip6作为变量
 @ip6: 3.75vw;
+
 .Footer {
   position: relative;
   display: flex;
   flex-direction: column;
+
   // tabbar加载的小动画
   @keyframes icon-enlarge {
     to {

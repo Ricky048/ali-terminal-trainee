@@ -1,0 +1,5 @@
+import './vant'
+
+export default {
+
+}

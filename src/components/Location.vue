@@ -16,29 +16,32 @@
 </template>
 
 <script>
+import bus from '@/store/bus.js'
 export default {
   data() {
     return {
       // 控制文字是否处于中间
-      isMiddle: true
+      isMiddle: true,
+      active: 0
     }
   },
   props: {
     area: {
       type: String,
       default: '北京市'
-    },
-    active: {
-      type: Number,
-      default: 0
     }
   },
-  watch: {}
+  created() {
+    bus.$on('activePage', (val) => {
+      this.active = val
+    })
+  }
 }
 </script>
 
 <style scoped lang="less">
 @ip6: 3.75vw;
+
 .location {
   display: flex;
   font-size: (14 / @ip6);
