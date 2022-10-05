@@ -1,11 +1,9 @@
 <template>
   <div class="main-info-box">
     <div class="left">
-      <Lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation">
-      </Lottie>
+      <Lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation"> </Lottie>
       <div class="detail">
-        <span class="weather-desc">{{ realTimeWeather.text }} {{ weather.daily[0].tempMax }}/{{ weather.daily[0].tempMin
-        }}℃</span>
+        <span class="weather-desc">{{ realTimeWeather().text }} {{ dailyWeather().daily[0].tempMax }}/{{ dailyWeather().daily[0].tempMin }}℃</span>
         <span class="time">{{ timeArea }} {{ time }}</span>
       </div>
     </div>
@@ -198,7 +196,7 @@ export default {
         // console.log(element)
         // 注意从vuex中取出来的数据需要加上括号，不然识别不到
         if (element.id === Number(this.realTimeWeather().icon)) {
-          console.log(this.realTimeWeather().icon)
+          // console.log(this.realTimeWeather().icon)
           this.defaultOptions.animationData = element.path
           return
         }
@@ -209,7 +207,7 @@ export default {
     this.getTime()
     this.disTimeArea()
     this.searchIcon()
-    console.log(this.realTimeWeather())
+    // console.log(this.realTimeWeather())
   },
   mounted() {
     // console.log(this.realTimeWeather)
@@ -280,7 +278,8 @@ export default {
       bottom: (2 / @ip6);
       left: (10 / @ip6);
 
-      .weather-desc {}
+      .weather-desc {
+      }
 
       .time {
         font-size: (12 / @ip6);
