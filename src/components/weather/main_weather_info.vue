@@ -3,20 +3,19 @@
     <div class="left">
       <lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation"></lottie>
       <div class="detail">
-        <span class="weather-desc">晴转阵雨 34/29℃</span>
-        <span class="time">日间 13:14</span>
+        <span class="weather-desc">{{ realTimeWeather.text }} {{ weather.daily[0].tempMax }}/{{ weather.daily[0].tempMin }}℃</span>
+        <span class="time">{{ timeArea }} {{ time }}</span>
       </div>
     </div>
     <div class="temp">
-      <span class="area-temp">29</span>
-      <span class="feeling-temp">体感：30°</span>
+      <span class="area-temp">{{ realTimeWeather.temp }}</span>
+      <span class="feeling-temp">体感：{{ realTimeWeather.feelsLike }}°</span>
     </div>
   </div>
 </template>
 
 <script>
 // 导入天气lottie
-
 // 柔和半透明图标
 import sunny_day from '@/assets/Lottie/sunny-day.json'
 import night_rain from '@/assets/Lottie/night-rain.json'
@@ -53,89 +52,160 @@ import windy from '@/assets/Lottie/Windy.json'
 import tornado from '@/assets/Lottie/tornado.json'
 export default {
   name: 'weather_info_box',
-  props: {},
+  props: {
+    realTimeWeather: {
+      type: Object,
+      default: null
+    },
+    weather: {
+      type: Object,
+      default: null
+    },
+    iconToNum: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {},
   data() {
     return {
-      defaultOptions: { animationData: cloudy_rainy, loop: true, autoplay: true },
+      defaultOptions: { animationData: sunny_day, loop: true, autoplay: true },
       defaultAnim: '',
       weatherIcon: [
         {
-          path: 'sunny_day',
+          path: sunny_day,
           timeDesc: '日间',
-          desc: '晴朗的上午'
+          desc: '晴朗的正午',
+          id: 100
         },
         {
-          path: 'night_rain',
-          timeDesc: '夜间',
-          desc: '夜间暴雨'
-        },
-        {
-          path: 'cloudy',
-          timeDesc: '日间',
-          desc: '多云的日间'
-        },
-        {
-          path: 'cloudy02',
-          timeDesc: '日间',
-          desc: '较轻的多云'
-        },
-        {
-          path: 'cloudy03',
-          timeDesc: '日间',
-          desc: '多云'
-        },
-        {
-          path: 'cloudy_rainy',
-          timeDesc: '日间',
-          desc: '晴转阵雨'
-        },
-        {
-          path: 'fog',
+          path: night_rain,
           timeDesc: 'both',
-          desc: '有雾'
+          desc: '大雨',
+          id: 307
         },
         {
-          path: 'full_moon',
-          timeDesc: '夜间',
-          desc: '晴朗无云的夜间'
+          path: cloudy,
+          timeDesc: '日间',
+          desc: '多云的日间',
+          id: 102
         },
         {
-          path: 'light_snow',
+          path: cloudy02,
+          timeDesc: '日间',
+          desc: '较轻的多云',
+          id: 103
+        },
+        {
+          path: cloudy03,
+          timeDesc: '日间',
+          desc: '多云',
+          id: 104
+        },
+        {
+          path: cloudy_rainy,
+          timeDesc: '日间',
+          desc: '晴转阵雨',
+          id: 300
+        },
+        {
+          path: fog,
           timeDesc: 'both',
-          desc: '阵雪'
+          desc: '有雾',
+          id: 501
         },
         {
-          path: 'night',
+          path: full_moon,
           timeDesc: '夜间',
-          desc: '较轻多云的夜间'
+          desc: '晴朗无云的夜间',
+          id: 150
         },
         {
-          path: 'night_cloudy',
-          timeDesc: '夜间',
-          desc: '夜间多云'
-        },
-        {
-          path: 'night_rain_storm',
+          path: light_snow,
           timeDesc: 'both',
-          desc: '雷阵雨'
+          desc: '阵雪',
+          id: 457
         },
         {
-          path: 'sunny_night',
+          path: night,
           timeDesc: '夜间',
-          desc: '晴朗的夜间'
+          desc: '较轻多云的夜间',
+          id: 152
         },
         {
-          path: 'thunder',
+          path: night_cloudy,
+          timeDesc: '夜间',
+          desc: '夜间多云',
+          id: 151
+        },
+        {
+          path: night_rain_storm,
           timeDesc: 'both',
-          desc: '打雷，可能下雨'
+          desc: '雷阵雨',
+          id: 302
+        },
+        {
+          path: sunny_night,
+          timeDesc: '夜间',
+          desc: '晴朗的夜间',
+          id: 150
+        },
+        {
+          path: thunder,
+          timeDesc: 'both',
+          desc: '打雷，可能下雨',
+          id: 154
         }
-      ]
+      ],
+      time: '',
+      timeArea: ''
+      // 接受实时信息
+      // realTimeWeather: this.realTimeWeather
     }
   },
   methods: {
     handleAnimation(anim) {
       this.defaultAnim = anim
+    },
+    getTime() {
+      let date = new Date()
+      this.time = date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+    },
+    disTimeArea() {
+      let date = new Date().getHours()
+      let time = ''
+      if (0 <= date && date < 3) time = '拂晓'
+      else if (3 <= date && date < 6) time = '黎明'
+      else if (6 <= date && date < 9) time = '清晨'
+      else if (9 <= date && date < 12) time = '上午'
+      else if (12 <= date && date < 15) time = '正午'
+      else if (15 <= date && date < 18) time = '下午'
+      else if (18 <= date && date < 21) time = '傍晚'
+      else time = '深夜'
+      this.timeArea = time
+    },
+    searchIcon() {
+      this.weatherIcon.forEach((element) => {
+        // console.log(element)
+        if (element.id === Number(this.iconToNum)) {
+          this.defaultOptions.animationData = element.path
+          // console.log(this.iconToNum)
+          return
+        }
+      })
     }
+    // getData() {
+    //   this.realTimeWeather = this.realTimeWeather
+    //   console.log(this.realTimeWeather)
+    // }
+  },
+  created() {
+    this.getTime()
+    this.disTimeArea()
+    this.searchIcon()
+  },
+  mounted() {
+    // console.log(this.realTimeWeather)
   }
 }
 </script>
@@ -147,7 +217,7 @@ export default {
   justify-content: space-between;
   margin: 0 auto;
   padding: (24 / @ip6) (35 / @ip6);
-  margin-top: 100px;
+  margin-top: (75 / 3.75vw);
   height: (150 / 3.75vw);
   width: 100%;
   border-radius: 15px;

@@ -37,6 +37,7 @@ export default {
   height: 10vw;
   line-height: 10vw;
   background-color: #fff;
+  z-index: 999;
   /* background-color: orange; */
 }
 </style>

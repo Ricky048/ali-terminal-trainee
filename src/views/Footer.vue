@@ -56,10 +56,13 @@ export default {
 // 此处使用iPhone6来进行设计，故使用ip6作为变量
 @ip6: 3.75vw;
 .Footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   // tabbar加载的小动画
   @keyframes icon-enlarge {
     to {
-      transform: scale(1.25) translateY(-3px);
+      transform: scale(1.5) translateY(-5px);
     }
   }
 
@@ -70,17 +73,18 @@ export default {
   .icon-box {
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
     align-items: center;
-    width: (26 / @ip6);
-    height: (26 / @ip6);
-    border: (3 / @ip6) solid white;
+    width: (24 / @ip6);
+    height: (24 / @ip6);
+    // border: (10 / @ip6) solid white;
     background-color: white;
     border-radius: 50%;
     z-index: 999;
 
     .tabbar-icon {
-      width: (26 / @ip6);
-      height: (26 / @ip6);
+      width: (22 / @ip6);
+      height: (22 / @ip6);
     }
   }
 }

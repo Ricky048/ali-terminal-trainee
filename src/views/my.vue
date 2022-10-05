@@ -11,6 +11,7 @@ export default {}
 <style lang="less" scoped>
 @ip6: 3.75vw;
 .my-box {
+  position: absolute;
   position: relative;
   height: 100vh;
   width: 100%;
