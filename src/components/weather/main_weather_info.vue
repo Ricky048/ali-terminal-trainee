@@ -58,14 +58,6 @@ import tornado from '@/assets/Lottie/tornado.json'
 export default {
   name: 'weather_info_box',
   props: {
-    // realTimeWeather: {
-    //   type: Object,
-    //   default: null
-    // },
-    // dailyWeather: {
-    //   type: Object,
-    //   default: null
-    // }
   },
   computed: {},
   data() {

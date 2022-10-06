@@ -7,6 +7,7 @@ import createPersistedState from 'vuex-persistedstate'
 import app from './modules/app'
 // 导入其他vuex模块
 import weather from './weather.js'
+import location from './location.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -17,7 +18,8 @@ export default new Vuex.Store({
   // 在此处挂载其他位置的模块
   modules: {
     m_weather: weather,
-    app
+    app,
+    m_location: location
   },
   /* vuex数据持久化配置 */
   plugins: [
