@@ -73,9 +73,9 @@ export default {
   },
   created() {
     // this.getRealTimeWeather()
-    this.getWeather()
   },
   mounted() {
+    this.getWeather()
     // this.getLocation()
   }
 }
