@@ -15,6 +15,10 @@ AMap.initAMapApiLoader({
   // plugin: ['AMap.Geolocation']
 })
 
+// 全局引入eCharts
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+
 // 全局引入Lottie
 import Lottie from 'vue-lottie'
 Vue.component('Lottie', Lottie)

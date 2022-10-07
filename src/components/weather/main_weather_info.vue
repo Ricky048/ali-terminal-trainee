@@ -1,7 +1,7 @@
 <template>
   <div class="main-info-box">
     <div class="left">
-      <Lottie class="lottie" :options="defaultOptions" :width="150" :height="150" @animCreated="handleAnimation"></Lottie>
+      <Lottie class="lottie" :options="defaultOptions" :width="200" :height="200" @animCreated="handleAnimation"></Lottie>
       <div class="detail">
         <span class="weather-desc">{{ realTimeWeather().text }} {{ dailyWeather().daily[0].tempMax }}/{{ dailyWeather().daily[0].tempMin }}℃</span>
         <span class="time">{{ timeArea }} {{ time }}</span>
@@ -57,8 +57,7 @@ import windy from '@/assets/Lottie/Windy.json'
 import tornado from '@/assets/Lottie/tornado.json'
 export default {
   name: 'weather_info_box',
-  props: {
-  },
+  props: {},
   computed: {},
   data() {
     return {
@@ -155,12 +154,6 @@ export default {
       ],
       time: '',
       timeArea: ''
-      // 接受实时信息
-      // realTimeWeather: this.realTimeWeather
-      // dailyWeather: {
-      //   tempMax: 36,
-      //   tempMin: -1
-      // }
     }
   },
   methods: {
@@ -218,10 +211,12 @@ export default {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  padding: (24 / @ip6) (35 / @ip6);
+  padding: (12 / @ip6) (35 / @ip6);
   margin-top: (75 / 3.75vw);
   height: (150 / 3.75vw);
-  width: 100%;
+  right: (12 / 3.75vw);
+  width: 100vw - (24 / 3.75vw);
+  // 全部图形圆角固定为15px
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.65);
   color: #efefef;
@@ -246,7 +241,7 @@ export default {
     }
 
     .feeling-temp {
-      font-size: (15 / @ip6);
+      font-size: (16 / @ip6);
     }
   }
 
@@ -259,8 +254,8 @@ export default {
 
     .lottie {
       position: absolute;
-      bottom: (5 / @ip6);
-      left: (-20 / @ip6);
+      bottom: (-7 / @ip6);
+      left: (-45 / @ip6);
     }
 
     .detail {
@@ -270,9 +265,6 @@ export default {
       align-items: baseline;
       bottom: (2 / @ip6);
       left: (10 / @ip6);
-
-      .weather-desc {
-      }
 
       .time {
         font-size: (12 / @ip6);

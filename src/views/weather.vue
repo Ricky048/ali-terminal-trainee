@@ -2,11 +2,14 @@
   <!-- 天气的界面 -->
   <div class="weather-box" :style="{ backgroundImage: 'url(' + isDay + ')' }">
     <info-box :dailyWeather="weatherData"></info-box>
+    <daily-fore></daily-fore>
+    <div class="box"></div>
   </div>
 </template>
 
 <script>
 import weather_info_box from '@/components/weather/main_weather_info.vue'
+import daily_fore from '@/components/weather/daily_fore.vue'
 import { mapMutations, mapState } from 'vuex'
 
 export default {
@@ -20,7 +23,8 @@ export default {
     }
   },
   components: {
-    'info-box': weather_info_box
+    'info-box': weather_info_box,
+    'daily-fore': daily_fore
   },
   methods: {
     ...mapMutations('m_weather', ['updateRealTimeWeather', 'updateFutureWeather']),
@@ -80,14 +84,23 @@ export default {
 <style lang="less" scoped>
 .weather-box {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   top: 0;
   box-sizing: border-box;
-  padding-left: (12 / 3.75vw);
-  padding-right: (12 / 3.75vw);
+  // padding-left: (12 / 3.75vw);
+  // padding-right: (12 / 3.75vw);
   width: 100%;
   height: 100vh;
   background-color: #efefef;
   // background-image: url('');
   background-size: cover;
+
+  .box {
+    margin-top: 12px;
+    flex: 1;
+    background-color: aqua;
+  }
 }
 </style>
