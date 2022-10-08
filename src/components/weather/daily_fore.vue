@@ -184,8 +184,14 @@ export default {
     },
     // 设置基准线,用于绘制数据可视化函数,原理是获取当前周最低气温集中的最高气温
     datum() {
-      var arr = [...this.dailyMinTemp]
-      arr = arr.sort()
+      var arr = []
+      for (let i = 0; i < this.dailyMinTemp.length; i++) {
+        arr.push(Number(this.dailyMinTemp[i]))
+      }
+      arr = arr.sort((a, b) => {
+        return a - b
+      })
+      console.log(arr)
       return arr[arr.length - 1]
     },
     // 获取当前的星期N
@@ -240,7 +246,13 @@ export default {
     min() {
       // 使用浅拷贝，防止进行数组的排序的时候影响到了原本的数组
       var arr = [...this.dailyMinTemp]
-      arr = arr.sort()
+      // for (let i = 0; i < this.dailyMinTemp.length; i++) {
+      //   arr.push(Number(this.dailyMinTemp[i]))
+      // }
+      arr = arr.sort((a, b) => {
+        return a - b
+      })
+      // console.log(arr)
       return arr[0]
     }
   },
