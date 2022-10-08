@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     ...mapState({
-      activeIndex: state => state.app.activeIndex
+      activeIndex: (state) => state.app.activeIndex
     })
   },
   watch: {
@@ -34,6 +34,8 @@ export default {
 
 <style>
 .header-box {
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 10vw;
   line-height: 10vw;

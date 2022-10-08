@@ -10,6 +10,7 @@
 import Header from '@/layout/Header.vue'
 import Main from '@/layout/Main.vue'
 import Footer from '@/layout/Footer.vue'
+
 export default {
   components: {
     LayoutHeader: Header,

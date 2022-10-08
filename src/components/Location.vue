@@ -5,10 +5,10 @@
     </div>
     <div>
       <span class="iconfont icon-location"></span>
-      <span>{{ area }}</span>
+      <span>{{ address() ? address().district : area }}</span>
       <span class="iconfont icon-right" v-if="active === 0"></span>
     </div>
-
+    <Map></Map>
     <div class="more-button" v-if="active === 0">
       <span class="iconfont icon-moreandroid"></span>
     </div>
@@ -17,19 +17,26 @@
 
 <script>
 import bus from '@/store/bus.js'
+import Map from './MapContainer.vue'
+import { mapMutations, mapState } from 'vuex'
 export default {
+  components: {
+    Map
+  },
   data() {
     return {
+      ...mapState('m_location', ['address']),
       // 控制文字是否处于中间
       isMiddle: true,
-      active: 0
+      active: 0,
+      area: '北京市'
     }
   },
   props: {
-    area: {
-      type: String,
-      default: '北京市'
-    }
+    // area: {
+    //   type: String,
+    //   default: '北京市'
+    // }
   },
   created() {
     bus.$on('activePage', (val) => {
