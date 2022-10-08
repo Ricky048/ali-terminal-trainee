@@ -1,7 +1,7 @@
 <template>
   <!-- 天气的界面 -->
   <div class="weather-box" :style="{ backgroundImage: 'url(' + isDay + ')' }">
-    <info-box :dailyWeather="weatherData"></info-box>
+    <info-box :dailyWeather="weatherData" :isDayOrNight="dayArea"></info-box>
     <daily-fore></daily-fore>
     <div class="box"></div>
   </div>
@@ -19,7 +19,8 @@ export default {
       ...mapState('m_location', ['address']),
       // 未来N天气象数据
       weatherData: {},
-      isDay: require('@/assets/background/cloudy.jpg')
+      isDay: require('@/assets/background/cloudy.jpg'),
+      dayArea: true
     }
   },
   components: {
@@ -50,10 +51,10 @@ export default {
       const { data: res } = await this.$http.get('https://devapi.qweather.com/v7/weather/now?location=' + Code[0].id + '&key=17fc788e661c475da127af5e7011abff')
       const { data: futureWeather } = await this.$http.get('https://devapi.qweather.com/v7/weather/7d?location=' + Code[0].id + '&key=17fc788e661c475da127af5e7011abff')
       // this.realTimeData = res.now
-      console.log(res)
+      // console.log(res)
       this.updateRealTimeWeather(res.now)
       this.updateFutureWeather(futureWeather)
-      this.judgeDayOrNight(futureWeather.daily[0])
+      this.dayArea = this.judgeDayOrNight(futureWeather.daily[0])
       console.log(futureWeather)
     },
 
@@ -65,9 +66,11 @@ export default {
       // console.log(sunset)
       if (date.getHours() < sunset && date.getHours() > sunrise) {
         // 时间段判定 6~18为白天，其余时间段为夜晚，以此判断背景图
-        this.isDay = require('@/assets/background/clear_day.jpg')
+        this.isDay = require('@/assets/background/sunny.jpg')
+        return true
       } else {
         this.isDay = require('@/assets/background/clear_night.jpg')
+        return false
       }
     }
   },

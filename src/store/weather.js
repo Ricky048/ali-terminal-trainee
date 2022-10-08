@@ -26,7 +26,7 @@ export default {
     // 整理气温列表作为数组
     dailyMaxTemp(state, getters) {
       let maxTemp = []
-      console.log(getters.dailyData)
+      // console.log(getters.dailyData)
       getters.dailyData.forEach((e) => {
         maxTemp.push(e.tempMax)
       })
@@ -35,7 +35,7 @@ export default {
 
     dailyMinTemp(state, getters) {
       let minTemp = []
-      console.log(getters.dailyData)
+      // console.log(getters.dailyData)
       getters.dailyData.forEach((e) => {
         minTemp.push(e.tempMin)
       })

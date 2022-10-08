@@ -57,13 +57,18 @@ import windy from '@/assets/Lottie/Windy.json'
 import tornado from '@/assets/Lottie/tornado.json'
 export default {
   name: 'weather_info_box',
-  props: {},
+  props: {
+    isDayOrNight: {
+      type: Boolean,
+      default: true
+    }
+  },
   computed: {},
   data() {
     return {
       ...mapState('m_weather', ['realTimeWeather', 'dailyWeather']),
 
-      defaultOptions: { animationData: night_rain, loop: true, autoplay: true },
+      defaultOptions: { animationData: this.isDayOrNight ? cloudy02 : sunny_night, loop: true, autoplay: true },
       defaultAnim: '',
 
       weatherIcon: [
