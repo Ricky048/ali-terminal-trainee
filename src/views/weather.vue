@@ -3,13 +3,18 @@
   <div class="weather-box" :style="{ backgroundImage: 'url(' + isDay + ')' }">
     <info-box :dailyWeather="weatherData" :isDayOrNight="dayArea"></info-box>
     <daily-fore></daily-fore>
-    <div class="box"></div>
+    <div class="box">
+      <weather-tool></weather-tool>
+    </div>
+    <!-- 把整个面板撑上去，防止出现tabbar遮挡面板的问题 -->
+    <div style="padding-bottom: 13%"></div>
   </div>
 </template>
 
 <script>
 import weather_info_box from '@/components/weather/main_weather_info.vue'
 import daily_fore from '@/components/weather/daily_fore.vue'
+import weatherTool from '@/components/weather/weather_tool_panel.vue'
 import { mapMutations, mapState } from 'vuex'
 
 export default {
@@ -25,10 +30,12 @@ export default {
   },
   components: {
     'info-box': weather_info_box,
-    'daily-fore': daily_fore
+    'daily-fore': daily_fore,
+    'weather-tool': weatherTool
   },
   methods: {
     ...mapMutations('m_weather', ['updateRealTimeWeather', 'updateFutureWeather']),
+    ...mapMutations('m_location', ['getLocationCode']),
 
     // 处理lottie动图
     handleAnimation(anim) {
@@ -47,7 +54,8 @@ export default {
         return
       }
       let { location: Code } = localCode
-      // console.log(Code)
+      // console.log(Code[0].id)
+      this.getLocationCode(Code[0].id)
       const { data: res } = await this.$http.get('https://devapi.qweather.com/v7/weather/now?location=' + Code[0].id + '&key=17fc788e661c475da127af5e7011abff')
       const { data: futureWeather } = await this.$http.get('https://devapi.qweather.com/v7/weather/7d?location=' + Code[0].id + '&key=17fc788e661c475da127af5e7011abff')
       // this.realTimeData = res.now
@@ -55,7 +63,7 @@ export default {
       this.updateRealTimeWeather(res.now)
       this.updateFutureWeather(futureWeather)
       this.dayArea = this.judgeDayOrNight(futureWeather.daily[0])
-      console.log(futureWeather)
+      // console.log(futureWeather)
     },
 
     // 处理背景图片的函数
@@ -69,7 +77,7 @@ export default {
         this.isDay = require('@/assets/background/sunny.jpg')
         return true
       } else {
-        this.isDay = require('@/assets/background/clear_night.jpg')
+        this.isDay = require('@/assets/background/night.jpg')
         return false
       }
     }
@@ -95,7 +103,6 @@ export default {
   // padding-left: (12 / 3.75vw);
   // padding-right: (12 / 3.75vw);
   width: 100%;
-  height: 100vh;
   background-color: #efefef;
   // background-image: url('');
   background-size: cover;
@@ -103,7 +110,9 @@ export default {
   .box {
     margin-top: 12px;
     flex: 1;
-    background-color: aqua;
+    width: 100%;
+    height: 1000vw;
+    background-color: transparent;
   }
 }
 </style>

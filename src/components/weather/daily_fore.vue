@@ -3,7 +3,7 @@
     <div class="weather-icon">
       <span class="icon-box" v-for="(item, i) in this.dailyWeather().daily" :key="i">
         <svg class="icon" aria-hidden="true" v-html="icons[i]"></svg>
-        <span class="date">{{ i === 0 ? '今天' : getUTCDay(i++) }}</span>
+        <span class="date">{{ i === 0 ? '今天' : getUTCDay(i) }}</span>
       </span>
     </div>
     <!-- 这个组件用于创建一个可视化天气温预报 -->
@@ -141,7 +141,7 @@ export default {
             // 填充区域
             areaStyle: {
               origin: Number(this.datum()),
-              opacity: 0.5
+              opacity: 0.35
             },
             name: 'Highest',
             type: 'line',
@@ -172,7 +172,7 @@ export default {
             areaStyle: {
               origin: Number(this.datum()),
               // color: 'rgba(255,255,255,0.4)'
-              opacity: 0.5
+              opacity: 0.35
             },
             name: 'Lowest',
             type: 'line',
@@ -191,9 +191,11 @@ export default {
     // 获取当前的星期N
     getUTCDay(i) {
       var date = new Date()
-      var UTCDay = date.getUTCDay()
+      var UTCDay = date.getDay()
       var weekday = new Array()
-      weekday = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      // console.log('ok')
+      // console.log(UTCDay)
+      weekday = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
       return weekday[(UTCDay + i) % 7]
     },
     // 用于获取weather_icon中的坐标
@@ -279,12 +281,12 @@ export default {
       flex-direction: column;
       align-items: center;
       color: #efefef;
-      font-size: 13px;
+      font-size: (12 / @ip6);
 
       .icon {
         display: inline-block;
-        width: 43px;
-        height: 43px;
+        width: (40 / @ip6);
+        height: (40 / @ip6);
       }
     }
   }

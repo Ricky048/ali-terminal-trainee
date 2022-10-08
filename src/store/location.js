@@ -4,7 +4,8 @@ export default {
     realTimeLocation: null,
     lng: '',
     lat: '',
-    address: ''
+    address: '',
+    locationCode: ''
   }),
 
   mutations: {
@@ -38,6 +39,10 @@ export default {
           }
         })
       })
+    },
+
+    getLocationCode(state, code) {
+      state.locationCode = code
     }
   },
 

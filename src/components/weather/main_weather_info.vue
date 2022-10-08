@@ -103,6 +103,12 @@ export default {
           id: 104
         },
         {
+          path: cloudy03,
+          timeDesc: '日间',
+          desc: '多云',
+          id: 101
+        },
+        {
           path: cloudy_rainy,
           timeDesc: '日间',
           desc: '晴转阵雨',
@@ -183,24 +189,26 @@ export default {
       this.timeArea = time
     },
     searchIcon() {
-      this.weatherIcon.forEach((element) => {
+      for (let i = 0; i < this.weatherIcon.length; i++) {
         // console.log(element)
         // 注意从vuex中取出来的数据需要加上括号，不然识别不到
-        if (element.id === Number(this.realTimeWeather().icon)) {
+        if (this.weatherIcon[i].id === Number(this.realTimeWeather().icon)) {
           // console.log(this.realTimeWeather().icon)
-          this.defaultOptions.animationData = element.path
+          this.defaultOptions.animationData = this.weatherIcon[i].path
           return
         }
-      })
+      }
+      // this.weatherIcon.forEach((element) => {
+      // })
     }
   },
   created() {
-    this.getTime()
-    this.disTimeArea()
-    this.searchIcon()
     // console.log(this.realTimeWeather())
+    this.searchIcon()
   },
   mounted() {
+    this.getTime()
+    this.disTimeArea()
     // console.log(this.realTimeWeather)
   },
   components: {

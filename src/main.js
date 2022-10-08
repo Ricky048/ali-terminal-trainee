@@ -16,7 +16,7 @@ AMap.initAMapApiLoader({
 })
 
 // 全局引入eCharts
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 
 // 全局引入Lottie
