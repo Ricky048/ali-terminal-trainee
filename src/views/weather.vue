@@ -1,6 +1,6 @@
 <template>
   <!-- 天气的界面 -->
-  <div class="weather-box" :style="{ backgroundImage: 'url(' + isDay + ')' }">
+  <div class="weather-box" :style="{ backgroundImage: 'url(' + isDay + ')' }" v-if="ifShow">
     <info-box :dailyWeather="weatherData" :isDayOrNight="dayArea"></info-box>
     <daily-fore></daily-fore>
     <div class="box">
@@ -16,7 +16,6 @@ import weather_info_box from '@/components/weather/main_weather_info.vue'
 import daily_fore from '@/components/weather/daily_fore.vue'
 import weatherTool from '@/components/weather/weather_tool_panel.vue'
 import { mapMutations, mapState } from 'vuex'
-
 export default {
   data() {
     return {
@@ -25,7 +24,8 @@ export default {
       // 未来N天气象数据
       weatherData: {},
       isDay: require('@/assets/background/cloudy.jpg'),
-      dayArea: true
+      dayArea: true,
+      ifShow: false
     }
   },
   components: {
@@ -36,25 +36,17 @@ export default {
   methods: {
     ...mapMutations('m_weather', ['updateRealTimeWeather', 'updateFutureWeather']),
     ...mapMutations('m_location', ['getLocationCode']),
-
     // 处理lottie动图
     handleAnimation(anim) {
       this.defaultAnim = anim
     },
-
     // 获取实时气象数据的方法，使用axios获取，async解包
     async getWeather() {
       const { data: location } = await this.$http.get('https://restapi.amap.com/v3/ip?key=d1f47fe9029b25c5c2ea0aa216365171')
-      // console.log(location)
-      let { data: localCode } = await this.$http.get('https://geoapi.qweather.com/v2/city/lookup?key=17fc788e661c475da127af5e7011abff&location=' + this.address().district + '&adm' + this.address().city)
-      if (!this.address()) {
-        let { data: localCode } = await this.$http.get('https://geoapi.qweather.com/v2/city/lookup?key=17fc788e661c475da127af5e7011abff&location=' + location.city)
-        const { data: res } = await this.$http.get('https://devapi.qweather.com/v7/weather/now?location=' + localCode.location[0].id + '&key=17fc788e661c475da127af5e7011abff')
-        const { data: futureWeather } = await this.$http.get('https://devapi.qweather.com/v7/weather/7d?location=' + localCode.location[0].id + '&key=17fc788e661c475da127af5e7011abff')
-        return
-      }
-      let { location: Code } = localCode
-      // console.log(Code[0].id)
+      console.log(this.address())
+      const { data: localCode } = await this.$http.get('https://geoapi.qweather.com/v2/city/lookup?key=17fc788e661c475da127af5e7011abff&location=' + this.address().district + '&adm=' + this.address().city)
+      // console.log(localCode)
+      const { location: Code } = localCode
       this.getLocationCode(Code[0].id)
       const { data: res } = await this.$http.get('https://devapi.qweather.com/v7/weather/now?location=' + Code[0].id + '&key=17fc788e661c475da127af5e7011abff')
       const { data: futureWeather } = await this.$http.get('https://devapi.qweather.com/v7/weather/7d?location=' + Code[0].id + '&key=17fc788e661c475da127af5e7011abff')
@@ -63,9 +55,9 @@ export default {
       this.updateRealTimeWeather(res.now)
       this.updateFutureWeather(futureWeather)
       this.dayArea = this.judgeDayOrNight(futureWeather.daily[0])
+      this.ifShow = true
       // console.log(futureWeather)
     },
-
     // 处理背景图片的函数
     judgeDayOrNight(dailyData) {
       let date = new Date()
@@ -106,7 +98,6 @@ export default {
   background-color: #efefef;
   // background-image: url('');
   background-size: cover;
-
   .box {
     margin-top: 12px;
     flex: 1;

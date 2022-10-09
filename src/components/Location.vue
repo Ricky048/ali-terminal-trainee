@@ -8,7 +8,6 @@
       <span>{{ address() ? address().district : area }}</span>
       <span class="iconfont icon-right" v-if="active === 0"></span>
     </div>
-    <Map></Map>
     <div class="more-button" v-if="active === 0">
       <span class="iconfont icon-moreandroid"></span>
     </div>
@@ -17,12 +16,8 @@
 
 <script>
 import bus from '@/store/bus.js'
-import Map from './MapContainer.vue'
 import { mapMutations, mapState } from 'vuex'
 export default {
-  components: {
-    Map
-  },
   data() {
     return {
       ...mapState('m_location', ['address']),

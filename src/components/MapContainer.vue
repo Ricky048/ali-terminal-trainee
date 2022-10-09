@@ -17,15 +17,6 @@ export default {
   methods: {
     ...mapMutations('m_location', ['getRealTimeLocation']),
 
-    // initMap() {
-    //   AMapLoader.load({
-    //     key: 'eea7c87fae2a8e20ff90f81708a3058c', // 申请好的Web端开发者Key，首次调用 load 时必填
-    //     version: '2.0', // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
-    //     plugins: [''] // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-    //   })
-
-    // },
-
     getLocation() {
       var _that = this
       let lng = ''
@@ -56,6 +47,7 @@ export default {
         function onComplete(data) {
           let position = data.position
           // data是具体的定位信息
+          // console.log(data.position)
           _that.getRealTimeLocation(data.position)
           lng = position.lng
           lat = position.lat
@@ -72,9 +64,10 @@ export default {
   },
   watch: {},
   created() {
-    this.getLocation()
+    // console.log('ok')
   },
   mounted() {
+    this.getLocation()
     //DOM初始化完成进行地图初始化
     // this.initMap()
   }

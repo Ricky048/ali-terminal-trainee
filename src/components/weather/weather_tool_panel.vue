@@ -43,28 +43,16 @@ export default {
       ...mapState('m_location', ['locationCode']),
       weatherIndex: [
         {
-          date: '2022-10-09',
-          type: '1',
           name: '运动指数',
-          level: '2',
-          category: '较适宜',
-          text: '天气较好，较适宜进行各种运动，但因天气热，请适当减少运动时间，降低运动强度。'
+          category: '较适宜'
         },
         {
-          date: '2022-10-09',
-          type: '3',
           name: '穿衣指数',
-          level: '6',
-          category: '热',
-          text: '天气热，建议着短裙、短裤、短薄外套、T恤等夏季服装。'
+          category: '热'
         },
         {
-          date: '2022-10-09',
-          type: '5',
           name: '紫外线指数',
-          level: '3',
-          category: '强',
-          text: '属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。'
+          category: '强'
         }
       ],
       airQuality: {
@@ -92,10 +80,11 @@ export default {
     async getQuality() {
       const { data: res } = await this.$http.get('https://devapi.qweather.com/v7/air/now?location=' + this.locationCode() + '&key=17fc788e661c475da127af5e7011abff')
       this.airQuality = res.now
-      console.log(this.airQuality)
+      // console.log(this.airQuality)
     }
   },
-  created() {
+  created() {},
+  mounted() {
     this.getIndex()
     this.getQuality()
   }

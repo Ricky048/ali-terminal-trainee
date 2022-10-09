@@ -28,7 +28,7 @@ export default {
         { title: '运动', iconPath: require('@/assets/icons/running.png'), activeIconPath: require('@/assets/icons/running-active.png'), path: '/sport', inAnimation: false, id: 1 },
         { title: '我的', iconPath: require('@/assets/icons/my.png'), activeIconPath: require('@/assets/icons/my-active.png'), path: '/my', inAnimation: false, id: 2 }
       ],
-      active: this.$store.state.app.activeIndex
+      active: 0
     }
   },
   methods: {
@@ -46,6 +46,7 @@ export default {
   },
   updated() {
     this.$store.commit('changeActiveIndex', this.active)
+    // this.changeAnim()
   }
 }
 </script>

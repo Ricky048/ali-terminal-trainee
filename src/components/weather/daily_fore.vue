@@ -77,6 +77,8 @@ export default {
       ],
       // iconDOM集,用于动态进行svg图标渲染
       icons: []
+      // dailyMax: [],
+      // dailyMin: []
     }
   },
   methods: {
@@ -145,7 +147,7 @@ export default {
             },
             name: 'Highest',
             type: 'line',
-            data: this.dailyMax
+            data: [this.dailyMaxTemp[0], ...this.dailyMaxTemp, this.dailyMaxTemp[6]]
           },
           {
             animation: false,
@@ -176,7 +178,7 @@ export default {
             },
             name: 'Lowest',
             type: 'line',
-            data: this.dailyMin
+            data: [this.dailyMinTemp[0], ...this.dailyMinTemp, this.dailyMinTemp[6]]
           }
         ]
       }
@@ -191,7 +193,7 @@ export default {
       arr = arr.sort((a, b) => {
         return a - b
       })
-      console.log(arr)
+      // console.log(arr)
       return arr[arr.length - 1]
     },
     // 获取当前的星期N
@@ -224,25 +226,24 @@ export default {
       this.icons = iconDom
       var i = this.iconIndex(arr.iconDay)
     }
+    // // 用于获取当前周最低气温
+    // getDailyMin() {
+    //   var arr = []
+    //   arr = [...this.dailyMinTemp]
+    //   arr.unshift(arr[0])
+    //   arr.push(arr[arr.length - 1])
+    //   this.dailyMin = [...arr]
+    // },
+    // // 用于获取当前周最高气温
+    // getDailyMax() {
+    //   var arr = []
+    //   arr = [this.dailyMaxTemp[0], ...this.dailyMaxTemp, this.dailyMaxTemp[6]]
+    //   console.log(arr)
+    //   this.dailyMin = [...arr]
+    // }
   },
   computed: {
     ...mapGetters('m_weather', ['dailyMaxTemp', 'dailyMinTemp']),
-    // 用于获取当前周最低气温
-    dailyMin() {
-      var arr = []
-      arr = this.dailyMinTemp
-      arr.unshift(arr[0])
-      arr.push(arr[arr.length - 1])
-      return arr
-    },
-    // 用于获取当前周最高气温
-    dailyMax() {
-      var arr = []
-      arr = this.dailyMaxTemp
-      arr.unshift(arr[0])
-      arr.push(arr[arr.length - 1])
-      return arr
-    },
     min() {
       // 使用浅拷贝，防止进行数组的排序的时候影响到了原本的数组
       var arr = [...this.dailyMinTemp]
@@ -258,9 +259,12 @@ export default {
   },
   mounted() {
     // this.drawChart()
+    this.getWeatherIcon()
+    this.getWeatherIcon()
     this.drawHoursPred()
-    this.getWeatherIcon()
-    this.getWeatherIcon()
+  },
+  created() {
+    console.log(this.dailyWeather())
   }
 }
 </script>

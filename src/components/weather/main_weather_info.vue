@@ -204,9 +204,9 @@ export default {
   },
   created() {
     // console.log(this.realTimeWeather())
-    this.searchIcon()
   },
   mounted() {
+    this.searchIcon()
     this.getTime()
     this.disTimeArea()
     // console.log(this.realTimeWeather)

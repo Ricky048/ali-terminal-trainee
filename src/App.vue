@@ -3,6 +3,7 @@
     <layout-header />
     <layout-main />
     <layout-footer />
+    <Map-container></Map-container>
   </div>
 </template>
 
@@ -10,13 +11,16 @@
 import Header from '@/layout/Header.vue'
 import Main from '@/layout/Main.vue'
 import Footer from '@/layout/Footer.vue'
+import Map from '@/components/MapContainer.vue'
 
 export default {
   components: {
     LayoutHeader: Header,
     LayoutMain: Main,
-    LayoutFooter: Footer
-  }
+    LayoutFooter: Footer,
+    'Map-container': Map
+  },
+  created() {}
 }
 </script>
 

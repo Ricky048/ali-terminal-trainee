@@ -4,7 +4,21 @@ export default {
     realTimeLocation: null,
     lng: '',
     lat: '',
-    address: '',
+    address: {
+      citycode: '0757',
+      adcode: '440605',
+      businessAreas: [],
+      neighborhoodType: '',
+      neighborhood: '',
+      building: '',
+      buildingType: '',
+      street: '万锦路',
+      streetNumber: '28号',
+      province: '广东省',
+      city: '佛山市',
+      district: '南海区',
+      township: '狮山镇'
+    },
     locationCode: ''
   }),
 
@@ -35,6 +49,7 @@ export default {
             // result为对应的地理位置详细信息
             // console.log(result)
             state.address = result.regeocode.addressComponent
+            console.log(result)
             // console.log(state.address)
           }
         })
