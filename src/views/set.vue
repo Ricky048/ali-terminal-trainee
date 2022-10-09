@@ -21,7 +21,7 @@
 <!--                <div style="display: flex; justify-content: flex-start;">-->
 <!--                  <img src="@/assets/icons/person.png" style="height: 30px; width: 30px; float: left; margin-top: 20px; margin-right: 15px; margin-left: 10px "/>-->
 <!--                  <div style="float: left">-->
-<!--                    <p style="font-style: normal; font-size: 20px;" @click="onMyMessage">个人信息</p>-->
+<!--                    <p style="font-style: normal; font-size: 20px;">个人信息</p>-->
 <!--                  </div>-->
 <!--                </div>-->
 <!--              </div></td>-->
@@ -32,7 +32,7 @@
 <!--                <div style="display: flex; justify-content: flex-start;">-->
 <!--                  <img src="@/assets/icons/set.png" style="height: 30px; width: 30px; float: left; margin-top: 20px; margin-right: 15px; margin-left: 10px "/>-->
 <!--                  <div style="float: left">-->
-<!--                  <p style="font-style: normal; font-size: 20px;" @click="onSet">设置</p>-->
+<!--                  <p style="font-style: normal; font-size: 20px;">设置</p>-->
 <!--                  </div>-->
 <!--                </div>-->
 <!--              </div></td>-->
@@ -41,74 +41,80 @@
 <!--      </div>-->
 <!--      </div>-->
     <van-cell-group>
-      <van-cell title="我的" title-style="text-align: center" size="large"/>
+      <van-cell title="设置" title-style="text-align: center" icon="arrow-left" size="large" @click="onBack"/>
     </van-cell-group>
-<!--    <van-cell-group>-->
-<!--      <van-cell title="头像" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" size="large" is-link>-->
+    <div style="margin-bottom: 10px" />
+    <van-cell-group>
+<!--      <van-cell title="通用" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" size="large" is-link>-->
 <!--        &lt;!&ndash; 使用 right-icon 插槽来自定义右侧图标 &ndash;&gt;-->
-<!--        <template #icon>-->
+<!--        <template #right-icon>-->
 <!--          <van-icon name="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png" class="head-icon" size="30" />-->
 <!--          &lt;!&ndash;            <van-icon name="search" class="search-icon" />&ndash;&gt;-->
 <!--        </template>-->
 <!--      </van-cell>-->
-<!--    </van-cell-group>-->
-<!--    <div style="text-align:center;margin-top:30px; margin-bottom: 10px" />-->
-    <van-grid :border="false" :column-num="3">
-      <van-grid-item>
-        <van-image
-          src="https://fastly.jsdelivr.net/npm/@vant/assets/icon-demo.png"
-        />
-
-      </van-grid-item>
-      <van-grid-item>
-        <div style="float: left">
-          <h2 style=" margin-top: 20px">{{username}}</h2>
-          <h3>{{userLabel}}</h3>
-        </div>
-      </van-grid-item>
-      <van-grid-item></van-grid-item>
-    </van-grid>
-    <div style="margin-bottom: 10px" />
-    <van-cell-group>
-      <van-cell title="个人信息" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px; margin-left:10px" size="large" is-link @click="onMyMessage">
-        <!-- 使用 right-icon 插槽来自定义右侧图标 -->
-        <template #icon>
-          <van-icon name="manager-o" class="head-icon" size="25" />
-          <!--            <van-icon name="search" class="search-icon" />-->
-        </template>
-      </van-cell>
-      <van-cell title="设置" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px; margin-left:10px" size="large" is-link @click="onSet">
-        <!-- 使用 right-icon 插槽来自定义右侧图标 -->
-        <template #icon>
-          <van-icon van-icon name="setting-o" class="head-icon" size="25" />
-          <!--            <van-icon name="search" class="search-icon" />-->
-        </template>
-      </van-cell>
+      <van-cell title="通用" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" is-link />
+      <van-cell title="新消息通知" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" is-link />
+      <van-cell title="外观与布局" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" is-link />
     </van-cell-group>
+    <p style="margin-left: 15px; font-size:14px;">安全与隐私</p>
+    <van-cell-group>
+      <van-cell title="安全中心" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" is-link />
+      <van-cell title="隐私" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" is-link />
+      <van-cell title="个人信息查询" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" is-link />
+    </van-cell-group>
+    <div style="margin-bottom: 7px" />
+    <van-cell-group>
+      <van-cell title="客服与帮助" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" is-link />
+      <van-cell title="关于" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;" is-link />
+    </van-cell-group>
+    <div style="margin-bottom: 7px" />
+    <van-cell-group>
+      <van-cell title="退出登录" @click="showLogin" size="large" title-style="font-family: 'Arial Normal', 'Arial'; line-height: 30px;text-align: center" />
+    </van-cell-group>
+<!--    <van-dialog v-model="showLogin" title="个性签名" show-cancel-button>-->
+<!--      <van-cell-group inset>-->
+<!--        <van-field v-model="value" style="margin-left: 15px" label="个性签名" placeholder="请输入个性签名" />-->
+<!--      </van-cell-group>-->
+<!--    </van-dialog>-->
   </div>
-
 </template>
 
 <script>
+  import { Dialog } from 'vant'
 export default {
   data() {
     return {
   username:'aliyun',
       userLabel: '运动健将',
-      weatherData: {}
     }
   },
-  methods: {
-    onMyMessage() {
-      this.$router.push({ path: '/mymessage' })
+  components: {
+    [Dialog.Component.name]: Dialog.Component,
+  },
+  methods:{
+    onBack() {
+      this.$router.push({ path: '/my' })
     },
-    onSet() {
-      this.$router.push({ path: '/set' })
+    showLogin() {
+      Dialog.confirm({
+        message:
+          '您确定要退出的登录吗？',
+      })
+        .then(() => {
+          // on confirm
+        })
+        .catch(() => {
+          // on cancel
+        });
     }
   }
 }
 </script>
 <style lang="less" scoped>
+  .head-icon {
+    font-size: 16px;
+    line-height: inherit;
+  }
   .table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -140,15 +146,5 @@ export default {
     width: 70px;
     height: 30px;
     /*border: 1px solid #333;*/
-  }
-  .weather-box {
-    position: absolute;
-    top: 0;
-    box-sizing: border-box;
-    padding-left: (12 / 3.75vw);
-    padding-right: (12 / 3.75vw);
-    width: 100%;
-    height: 100vh;
-    background-color: #efefef;
   }
 </style>
