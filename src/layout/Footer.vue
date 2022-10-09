@@ -8,7 +8,7 @@
         </span>
         <!-- tabbar图片 -->
         <template #icon="props">
-          <div class="icon-box" :id="item.inAnimation ? 'Anim' : ''" @click="changeAnim(item)">
+          <div class="icon-box" :id="item.inAnimation ? 'Anim' : ''">
             <img :src="props.active ? item.activeIconPath : item.iconPath" class="tabbar-icon" />
           </div>
         </template>
@@ -28,25 +28,37 @@ export default {
         { title: '运动', iconPath: require('@/assets/icons/running.png'), activeIconPath: require('@/assets/icons/running-active.png'), path: '/sport', inAnimation: false, id: 1 },
         { title: '我的', iconPath: require('@/assets/icons/my.png'), activeIconPath: require('@/assets/icons/my-active.png'), path: '/my', inAnimation: false, id: 2 }
       ],
-      active: 0
+      active: 0,
+      inActive: 0
     }
   },
   methods: {
-    changeAnim(item) {
-      // 点击时加载动画，并且将flag设置为true
-      item.inAnimation = true
-      // 同时将上一个已经加载了动画的组件的flag设置为false
-      // 感觉这个速度不够快，或许得设置一个并发？？
-      if (item.id !== this.active) this.tabbarItem[this.active].inAnimation = false
-    }
+    // changeAnim(item) {
+    //   // 点击时加载动画，并且将flag设置为true
+    //   item.inAnimation = true
+    //   // 同时将上一个已经加载了动画的组件的flag设置为false
+    //   // 感觉这个速度不够快，或许得设置一个并发？？
+    //   // 确保所有的icon都没有动画了，直接使用for循环将所有动画都缩回去
+    //   for (let i = 0; i < 3; i++) {
+    //     if (this.tabbarItem[i].id !== this.active) this.tabbarItem[i].inAnimation = false
+    //   }
+    // }
   },
   created() {
     // 界面刚开始加载时启动动画使weather/home界面突出
     this.tabbarItem[this.active].inAnimation = true
   },
   updated() {
-    this.$store.commit('changeActiveIndex', this.active)
     // this.changeAnim()
+  },
+  watch: {
+    active: {
+      handler(newVal, oldVal) {
+        this.tabbarItem[oldVal].inAnimation = false
+        this.tabbarItem[newVal].inAnimation = true
+      },
+      immediate: true
+    }
   }
 }
 </script>
