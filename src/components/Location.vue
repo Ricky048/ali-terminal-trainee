@@ -54,7 +54,6 @@ export default {
   margin: 0 auto;
   // background-color: pink;
   box-sizing: border-box;
-  border-top: #3f3f3f 1px solid;
   color: #3f3f3f;
 
   .icon-right,
