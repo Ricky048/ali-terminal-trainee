@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkali_terminal_trainee"]=self["webpackChunkali_terminal_trainee"]||[]).push([[770],{4770:function(e,n,l){l.r(n),l.d(n,{default:function(){return c}});var t=function(){var e=this,n=e._self._c;return n("div",[e._v(" My page ")])},r=[],u={},a=u,i=l(3736),s=(0,i.Z)(a,t,r,!1,null,null,null),c=s.exports}}]);
-//# sourceMappingURL=770.4a50bd40.js.map
