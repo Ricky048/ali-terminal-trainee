@@ -264,7 +264,7 @@ export default {
     this.drawHoursPred()
   },
   created() {
-    console.log(this.dailyWeather())
+    // console.log(this.dailyWeather())
   }
 }
 </script>

@@ -56,8 +56,8 @@ export default {
       handler(newVal, oldVal) {
         this.tabbarItem[oldVal].inAnimation = false
         this.tabbarItem[newVal].inAnimation = true
-      },
-      immediate: true
+      }
+      // immediate: true
     }
   }
 }

@@ -43,7 +43,7 @@ export default {
     // 获取实时气象数据的方法，使用axios获取，async解包
     async getWeather() {
       const { data: location } = await this.$http.get('https://restapi.amap.com/v3/ip?key=d1f47fe9029b25c5c2ea0aa216365171')
-      console.log(this.address())
+      // console.log(this.address())
       const { data: localCode } = await this.$http.get('https://geoapi.qweather.com/v2/city/lookup?key=17fc788e661c475da127af5e7011abff&location=' + this.address().district + '&adm=' + this.address().city)
       // console.log(localCode)
       const { location: Code } = localCode

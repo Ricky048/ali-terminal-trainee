@@ -49,7 +49,7 @@ export default {
             // result为对应的地理位置详细信息
             // console.log(result)
             state.address = result.regeocode.addressComponent
-            console.log(result)
+            // console.log(result)
             // console.log(state.address)
           }
         })
