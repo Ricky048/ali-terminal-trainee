@@ -1,7 +1,7 @@
 <template>
   <div class="main-info-box">
     <div class="left">
-      <Lottie class="lottie" :options="defaultOptions" :width="200" :height="200" @animCreated="handleAnimation"></Lottie>
+      <Lottie class="lottie" :options="defaultOptions" :width="lotSize" :height="lotSize" @animCreated="handleAnimation"></Lottie>
       <div class="detail">
         <span class="weather-desc">{{ realTimeWeather().text }} {{ dailyWeather().daily[0].tempMax }}/{{ dailyWeather().daily[0].tempMin }}℃</span>
         <span class="time">{{ timeArea }} {{ time }}</span>
@@ -202,6 +202,11 @@ export default {
       // })
     }
   },
+  computed: {
+    lotSize() {
+      return Math.floor((205 / 3.75) * (window.screen.width / 100))
+    }
+  },
   created() {
     // console.log(this.realTimeWeather())
   },
@@ -228,7 +233,7 @@ export default {
   margin-top: (75 / 3.75vw);
   height: (150 / 3.75vw);
   right: (12 / 3.75vw);
-  width: 100vw - (24 / 3.75vw);
+  width: 100vw - (40 / 3.75vw);
   // 全部图形圆角固定为15px
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.65);
@@ -278,6 +283,7 @@ export default {
       align-items: baseline;
       bottom: (2 / @ip6);
       left: (10 / @ip6);
+      font-size: (16 / @ip6);
 
       .time {
         font-size: (12 / @ip6);

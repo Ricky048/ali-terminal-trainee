@@ -94,6 +94,7 @@ export default {
 <style lang="less" scoped>
 @ip6: 3.75vw;
 .tool-main-box {
+  font-size: (16 / @ip6);
   .hours-weather {
     border-top: rgba(255, 255, 255, 0.2) solid 0.1vw;
 

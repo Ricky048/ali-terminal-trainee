@@ -36,10 +36,12 @@ export default {
   methods: {
     ...mapMutations('m_weather', ['updateRealTimeWeather', 'updateFutureWeather']),
     ...mapMutations('m_location', ['getLocationCode']),
+
     // 处理lottie动图
     handleAnimation(anim) {
       this.defaultAnim = anim
     },
+
     // 获取实时气象数据的方法，使用axios获取，async解包
     async getWeather() {
       const { data: location } = await this.$http.get('https://restapi.amap.com/v3/ip?key=d1f47fe9029b25c5c2ea0aa216365171')
@@ -58,6 +60,7 @@ export default {
       this.ifShow = true
       // console.log(futureWeather)
     },
+
     // 处理背景图片的函数
     judgeDayOrNight(dailyData) {
       let date = new Date()
