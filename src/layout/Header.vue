@@ -1,6 +1,7 @@
 <template>
   <div class="header-box" v-show="isShow">
     <Location :area="realTimeArea" />
+    <location-selector v-if="ifShowPanel" @showPanel="show"></location-selector>
   </div>
 </template>
 
@@ -8,14 +9,22 @@
 import { mapState } from 'vuex'
 
 import Location from '@/components/Location.vue'
+import location_selector from '@/components/location/location_panel.vue'
 export default {
   data() {
     return {
       // 实时区域显示文本
       realTimeArea: '南海区',
-      isShow: {}
+      isShow: {},
+      ifShowPanel: true
     }
   },
+  methods: {
+    show(val) {
+      console.log(val)
+    }
+  },
+  props: {},
   computed: {
     ...mapState({
       activeIndex: (state) => state.app.activeIndex
@@ -27,7 +36,8 @@ export default {
     }
   },
   components: {
-    Location
+    Location,
+    'location-selector': location_selector
   }
 }
 </script>

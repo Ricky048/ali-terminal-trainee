@@ -1,13 +1,16 @@
 <template>
   <div class="location" :id="active === 1 ? 'set-middle' : ''">
+    <!-- 主菜单 -->
     <div class="menu-box">
       <span class="iconfont icon-caidan" v-if="active === 0"></span>
     </div>
-    <div>
+    <!-- 下拉菜单，包括位置展示 -->
+    <div @click="showPanel">
       <span class="iconfont icon-location"></span>
       <span>{{ address() ? address().district : area }}</span>
       <span class="iconfont icon-right" v-if="active === 0"></span>
     </div>
+    <!-- 更多按钮，暂时只装设置 -->
     <div class="more-button" v-if="active === 0">
       <span class="iconfont icon-moreandroid"></span>
     </div>
@@ -16,7 +19,7 @@
 
 <script>
 import bus from '@/store/bus.js'
-import { mapMutations, mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -24,7 +27,8 @@ export default {
       // 控制文字是否处于中间
       isMiddle: true,
       active: 0,
-      area: '北京市'
+      area: '北京市',
+      isShow: false
     }
   },
   props: {
@@ -32,6 +36,13 @@ export default {
     //   type: String,
     //   default: '北京市'
     // }
+  },
+  methods: {
+    showPanel() {
+      // 将isShow抛给父组件
+      this.$emit('showPanel', this.isShow)
+      this.isShow = !this.isShow
+    }
   },
   created() {
     bus.$on('activePage', (val) => {
