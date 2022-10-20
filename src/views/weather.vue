@@ -95,12 +95,10 @@ export default {
   justify-content: space-between;
   top: 0;
   box-sizing: border-box;
-  // padding-left: (12 / 3.75vw);
-  // padding-right: (12 / 3.75vw);
   width: 100%;
   background-color: #efefef;
-  // background-image: url('');
   background-size: cover;
+
   .box {
     margin-top: 12px;
     flex: 1;

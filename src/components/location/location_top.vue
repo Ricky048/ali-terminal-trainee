@@ -1,18 +1,10 @@
 <template>
   <div class="location" :id="active === 1 ? 'set-middle' : ''">
-    <!-- 主菜单 -->
-    <div class="menu-box">
-      <span class="iconfont icon-caidan" v-if="active === 0"></span>
-    </div>
-    <!-- 下拉菜单，包括位置展示 -->
-    <div @click="showPanel">
+    <!-- 位置展示 -->
+    <div @click="showPopup">
       <span class="iconfont icon-location"></span>
       <span>{{ address() ? address().district : area }}</span>
       <span class="iconfont icon-right" v-if="active === 0"></span>
-    </div>
-    <!-- 更多按钮，暂时只装设置 -->
-    <div class="more-button" v-if="active === 0">
-      <span class="iconfont icon-moreandroid"></span>
     </div>
   </div>
 </template>
@@ -28,18 +20,39 @@ export default {
       isMiddle: true,
       active: 0,
       area: '北京市',
-      isShow: false
+      isShow: true
     }
   },
   props: {
-    // area: {
-    //   type: String,
-    //   default: '北京市'
-    // }
+    show: {
+      type: Boolean
+    }
+  },
+  watch: {
+    show: {
+      handler(oldVal, newVal) {
+        this.isShow = newVal
+      }
+    },
+    isShow: {
+      // 在watch监听函数里面进行
+      handler(oldVal, newVal) {
+        // console.log(oldVal, newVal)
+        // 获取所有类名为icon-right的元素，当前只有一个
+        let rightAngle = document.querySelector('.icon-right')
+        // 对于id名进行操作
+        if (newVal) {
+          rightAngle.id = 'anim-start'
+        } else {
+          rightAngle.id = ''
+        }
+      }
+    }
   },
   methods: {
-    showPanel() {
-      // 将isShow抛给父组件
+    // 用操作DOM元素的方法写一个动画
+    showPopup() {
+      // 这个方法用于对地址查找panel进行展示
       this.$emit('showPanel', this.isShow)
       this.isShow = !this.isShow
     }
@@ -52,39 +65,40 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 @ip6: 3.75vw;
+@keyframes rotateAngle-start {
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+#anim-start {
+  animation: rotateAngle-start 0.2s forwards;
+}
 
 .location {
-  display: flex;
   font-size: (14 / @ip6);
   font-weight: 500;
-  justify-content: space-between;
-  align-items: center;
   padding: 0 (12 / @ip6);
   margin: 0 auto;
-  // background-color: pink;
   box-sizing: border-box;
   color: #3f3f3f;
 
   .icon-right,
   .icon-location {
+    // 变换成为行内块元素，使之能够进行
+    display: inline-block;
     font-size: (14 / @ip6);
     font-weight: 1000;
-    // transform: rotate(90deg);
     margin-left: 0.6vw;
     vertical-align: middle;
   }
 
   .icon-location {
     font-size: (18 / 3.75vw);
-    transform: rotate(0);
     margin-left: 0;
     margin-right: 0.5vw;
-  }
-
-  .icon-caidan {
-    font-weight: 1000;
   }
 
   .icon-moreandroid {
