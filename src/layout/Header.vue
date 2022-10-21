@@ -5,7 +5,13 @@
       <Location @showPanel="displayPanel" :show="ifShowPanel" />
       <right-menu />
     </div>
-    <location-selector :show="ifShowPanel" @close="getCloseFlag"></location-selector>
+    <!-- 查找位置的面板 -->
+    <location-selector :show="ifShowPanel" @close="getCloseFlag" />
+
+    <!-- 侧边栏 -->
+    <left-panel />
+
+    <!-- 设置按键 -->
   </div>
 </template>
 
@@ -16,6 +22,7 @@ import Location from '@/components/location/location_top.vue'
 import left_menu from '@/components/menu/left_menu.vue'
 import right_menu from '@/components/menu/right_menu.vue'
 import location_selector from '@/components/location/location_select.vue'
+import left_panel from '@/components/panel/left_panel.vue'
 export default {
   data() {
     return {
@@ -53,7 +60,8 @@ export default {
     Location,
     'left-menu': left_menu,
     'right-menu': right_menu,
-    'location-selector': location_selector
+    'location-selector': location_selector,
+    'left-panel': left_panel
   }
 }
 </script>
@@ -61,7 +69,7 @@ export default {
 <style lang="less" scoped>
 .main-box {
   // 不知道什么原因，这个头部必须加上层级才能够显示
-  z-index: 999;
+  z-index: 2;
   .header-box {
     display: flex;
     justify-content: space-around;
