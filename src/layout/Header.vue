@@ -68,13 +68,14 @@ export default {
 
 <style lang="less" scoped>
 .main-box {
+  position: fixed;
+  top: 0;
+  width: 100%;
   // 不知道什么原因，这个头部必须加上层级才能够显示
   z-index: 2;
   .header-box {
     display: flex;
     justify-content: space-around;
-    position: fixed;
-    top: 0;
     width: 100%;
     height: 10vw;
     line-height: 10vw;

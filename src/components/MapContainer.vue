@@ -3,15 +3,15 @@
 </template>
 
 <script>
-import AMapLoader from '@amap/amap-jsapi-loader'
+// import AMap from '@/api/amap'
 import { mapMutations, mapState } from 'vuex'
 export default {
   data() {
     return {
       ...mapState('m_location', ['realTimeLocation']),
-      realTimeLocationData: null,
-      lat: '',
-      lng: ''
+      realTimeLocationData: null
+      // lat: '',
+      // lng: ''
     }
   },
   methods: {
@@ -19,20 +19,14 @@ export default {
 
     getLocation() {
       var _that = this
-      let lng = ''
-      let lat = ''
+      // let lng = ''
+      // let lat = ''
       AMap.plugin('AMap.Geolocation', function () {
         var geolocation = new AMap.Geolocation({
           // 是否使用高精度定位，默认：true
           enableHighAccuracy: true,
           // 设置定位超时时间，默认：无穷大
           timeout: 10000,
-          // 定位按钮的停靠位置的偏移量
-          offset: [10, 20],
-          //  定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-          zoomToAccuracy: true,
-          //  定位按钮的排放位置,  RB表示右下
-          position: 'RB',
           useNative: true
         })
 
@@ -47,10 +41,10 @@ export default {
         function onComplete(data) {
           let position = data.position
           // data是具体的定位信息
-          // console.log(data.position)
+          console.log(data.position)
           _that.getRealTimeLocation(data.position)
-          lng = position.lng
-          lat = position.lat
+          // lng = position.lng
+          // lat = position.lat
           // console.log(_that.realTimeLocation())
           // return data.position
         }

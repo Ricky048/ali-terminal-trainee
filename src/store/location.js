@@ -15,6 +15,7 @@ export default {
       street: '万锦路',
       streetNumber: '28号',
       province: '广东省',
+      // 以下两个数据用来获取实时天气数据，使用字符拼接方法通过axios获取
       city: '佛山市',
       district: '南海区',
       township: '狮山镇'

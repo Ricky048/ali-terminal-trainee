@@ -10,9 +10,9 @@ Vue.use(AMap)
 // 初始化vue-amap
 AMap.initAMapApiLoader({
   // 高德key
-  key: 'eea7c87fae2a8e20ff90f81708a3058c'
+  key: 'eea7c87fae2a8e20ff90f81708a3058c',
   // 插件集合 （插件按需引入）
-  // plugin: ['AMap.Geolocation']
+  plugin: ['AMap.Geolocation', 'AMap.DistrictSearch', 'AMap.Geocoder', 'AMap.DistrictLayer', 'AMap.AutoComplete', 'AMap.PlaceSearch']
 })
 
 // 全局引入eCharts

@@ -3,19 +3,10 @@
     <!-- 地址选择面板 -->
     <transition name="search">
       <div class="select-panel" v-show="show">
-        <input class="search-text" type="text" v-model.lazy="keyword" placeholder="搜索" />
-        <div class="search-history" v-if="false"></div>
-        <div class="search-result" else>
-          <div>11324564665789111111111111111111111111111111111111</div>
-          <div>21324564665789</div>
-          <div>31324564665789</div>
-          <div>41324564665789</div>
-          <div>51324564665789</div>
-          <div>61324564665789</div>
-          <div>71324564665789</div>
-          <div>81324564665789</div>
-          <div>91324564665789</div>
-          <div>113245646657890</div>
+        <input class="search-text" type="text" v-model="keyword" placeholder="搜索" />
+        <!-- <div class="search-history" v-if="false"></div> -->
+        <div class="search-result" v-if="area.length !== 0">
+          <div v-for="(item, i) in area" :key="i" @click="changeArea(item.district)">{{ item.name }}</div>
         </div>
       </div>
     </transition>
@@ -33,13 +24,27 @@ export default {
   name: 'location-selector',
   data() {
     return {
-      keyword: ''
+      // 输入框中的关键字
+      keyword: '',
+      area: [],
+      chooseArea: {
+        // 省
+        province: '',
+        // 市
+        city: '',
+        // 区
+        district: ''
+      }
     }
   },
   methods: {
     unShowPanel() {
-      console.log('ok')
+      // console.log('ok')
       this.$emit('close', false)
+    },
+
+    changeArea(district) {
+      // if()
     }
   },
   // props是只读的，并不能进行修改
@@ -53,18 +58,34 @@ export default {
     keyword: {
       handler(val) {
         console.log(val)
-        AMap.plugin('AMap.Autocomplete', function () {
+        // 获取输入提示信息
+        AMap.plugin('AMap.Autocomplete', () => {
+          let _that = this
           // 实例化Autocomplete
           var autoOptions = {
-            //city 限定城市，默认全国
             city: '全国'
           }
           var autoComplete = new AMap.Autocomplete(autoOptions)
-          autoComplete.search(keyword, function (status, result) {
-            // 搜索成功时，result即是对应的匹配数据
-            console.log(result)
+          autoComplete.search(val, function (status, result) {
+            let tips = []
+            console.log(result.tips)
+            if (result.tips) {
+              result.tips.forEach((res) => {
+                tips.push(res)
+              })
+            }
+            _that.area = tips
+            // console.log(tips)
           })
         })
+      }
+    },
+    show: {
+      handler(newVal) {
+        // 隐藏的时候清除输入框里面的所有内容
+        if (!newVal) {
+          ;(this.area = []), (this.keyword = '')
+        }
       }
     }
   }

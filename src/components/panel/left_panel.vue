@@ -52,7 +52,7 @@ export default {
 }
 .panel-enter,
 .panel-leave-to {
-  transform: translate(-50vw);
+  transform: translate(-60vw);
   opacity: 0;
 }
 
@@ -62,8 +62,7 @@ export default {
 }
 
 .main-box {
-  // display: flex;
-  position: fixed;
+  position: sticky;
   margin-top: 10vw;
   width: 100%;
   // background-color: pink;
@@ -77,7 +76,7 @@ export default {
     z-index: 1;
     position: absolute;
     height: 100vh;
-    width: 45vw;
+    width: 60vw;
     background-color: skyblue;
   }
 }
